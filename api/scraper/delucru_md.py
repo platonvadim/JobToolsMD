@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
+
 class ParseDelucru:
     def __init__(self, job_url=None):
         self.url = job_url
@@ -19,12 +20,11 @@ class ParseDelucru:
 
     def get_job_by_id(self, job_id):
         self.url = f"https://www.delucru.md/job/{job_id}"
-        return self._parse_page()
+        return self.get_job_by_url(self.url)
 
     def get_job_by_url(self, job_url=None):
         pattern = r'^https?://(?:www\.)?delucru\.md/job/\d+$'
         job_url = job_url if job_url is not None else self.url
-        print(job_url, re.fullmatch(pattern, job_url))
         if re.fullmatch(pattern, job_url) is None:
             return None
         self.url = job_url
@@ -35,7 +35,7 @@ class ParseDelucru:
         if page.status_code != 200:
             return None
         soup = BeautifulSoup(page.content, "html.parser")
-        self.job_data["title"] = soup.title.string
+        self.job_data["title"] = soup.title.string.strip()
 
         lead_data = soup.findAll('div', class_="lead")[0]
 

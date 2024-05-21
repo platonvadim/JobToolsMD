@@ -1,9 +1,9 @@
 from client.web_interface import WebApp
+import os
 
 
 def main():
-    # job_url = input("Enter delucru url: ")
-    app = WebApp()
+    app = WebApp(os.environ.get("GROQ_API_KEY"))
 
 
 if __name__ == '__main__':
