@@ -1,8 +1,8 @@
  # CoverAI
- ![Product Screenshot](https://i.imgur.com/xDxfjgT.jpg)
+ ![Product Screenshot](client/images/logo.png)
  ## About The Project
 
-CoverAI - is a tool for parsing the information from moldavian jobs website and  generate cover letters for job application. Powered by Groq.
+JobToolsMD - is a bunch of tools for parsing the information from moldavian jobs website and generate cover letters for job application. Powered by Groq.
 
  ### Built With
 

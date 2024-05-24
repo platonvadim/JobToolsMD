@@ -31,8 +31,8 @@ class WebApp:
         with st.sidebar:
             logo = Image.open('./client/images/logo.png')
             st.image(logo)
-            st.markdown("**JobToolsMD** - is a tool for parsing the information from moldavian jobs"
-                        " website and  generate cover letters for job application. Powered by Groq.")
+            st.markdown("**JobToolsMD** - is a bunch of tools for parsing the information from moldavian jobs"
+                        " website and generate cover letters for job application. Powered by Groq.")
             st.header('Instructions', divider='red')
             st.write("Just select job aggregator or custom site,"
                      "paste site URL for parsing, and provide some information about yourself.")
