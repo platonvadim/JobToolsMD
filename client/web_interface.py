@@ -10,7 +10,7 @@ from PIL import Image
 class WebApp:
     def __init__(self, api_key):
         self.AI = GroqClient(api_key)
-        st.set_page_config(page_title="CoverAI", page_icon="📈")
+        st.set_page_config(page_title="CoverAI", page_icon="💼")
         st.title('CoverLetter AI by Vadim Platon')
         st.subheader('**Generator of letters for job applications**')
 
@@ -31,7 +31,11 @@ class WebApp:
         with st.sidebar:
             logo = Image.open('./client/images/logo.png')
             st.image(logo)
-            st.write("CoverAI - is a tool for parsing the information from moldavian jobs website and  generate cover letters for job application. Powered by Groq.")
+            st.markdown("**JobToolsMD** - is a tool for parsing the information from moldavian jobs"
+                        " website and  generate cover letters for job application. Powered by Groq.")
+            st.header('Instructions', divider='red')
+            st.write("Just select job aggregator or custom site,"
+                     "paste site URL for parsing, and provide some information about yourself.")
 
     def _custom_widget(self):
         st.header('Custom', divider='red')
