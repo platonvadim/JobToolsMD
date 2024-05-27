@@ -10,6 +10,8 @@ JobToolsMD - is a bunch of tools for parsing the information from moldavian jobs
 - [Streamlit](https://streamlit.io/)
 - [Groq](https://groq.com/)
 
+ ### Screenshots
+ ![Product Screenshot](client/images/Screenshot-1.png)
  ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
@@ -22,7 +24,7 @@ This project was written using Python 3.12.
 1. Get a free API Key at [https://console.groq.com/docs/quickstart](https://console.groq.com/docs/quickstart)
 2. Clone the repo
    ```sh
-   git clone https://github.com/platonvadim/coverAI.git
+   git clone https://github.com/platonvadim/JobToolsMD.git
    ```
 3. Install python packages
    ```sh
@@ -46,8 +48,11 @@ This project was written using Python 3.12.
 
 - [x] Add delucru.md possibility
 - [x] Add rabota.md parsing possibility
+- [x] Job suitability checker
 - [ ] Rewrite on Django
-- [ ] Multi-language FrontEnd
+- [ ] Copy to clipboard and save to file features
+- [ ] Local database of all jobs
+- [ ] Multi-language support
   - [ ] Russian
   - [ ] Romanian
 
@@ -69,5 +74,5 @@ Distributed under the MIT License. See [MIT License](https://opensource.org/lice
 
 Vadim Platon - [@twitter](https://x.com/mr_vadim_platon)
 
-Project Link: [https://github.com/platonvadim/coverAI](https://github.com/platonvadim/coverAI)
+Project Link: [https://github.com/platonvadim/JobToolsMD](https://github.com/platonvadim/JobToolsMD)
 

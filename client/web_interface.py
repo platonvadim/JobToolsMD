@@ -8,10 +8,22 @@ from PIL import Image
 
 
 class WebApp:
+    """
+    This class defines the core functionality of the CoverAI web application.
+
+    Args:
+        api_key (str): The API key used to access the Groq AI service.
+    """
     def __init__(self, api_key):
+        """
+        Initializes the WebApp instance.
+
+        Args:
+            api_key (str): The API key used to access the Groq AI service.
+        """
         self.AI = GroqClient(api_key)
         st.set_page_config(page_title="CoverAI", page_icon="💼")
-        st.title('CoverLetter AI by Vadim Platon')
+        st.title('JobToolsMD Project')
         st.subheader('**Generator of letters for job applications**')
 
         model_options = st.selectbox(
@@ -30,6 +42,7 @@ class WebApp:
 
         with st.sidebar:
             logo = Image.open('./client/images/logo.png')
+            sigmoid_logo = Image.open('./client/images/sigmoid.jpg')
             st.image(logo)
             st.markdown("**JobToolsMD** - is a bunch of tools for parsing the information from moldavian jobs"
                         " website and generate cover letters for job application. Powered by Groq.")
@@ -37,7 +50,16 @@ class WebApp:
             st.write("Just select job aggregator or custom site,"
                      "paste site URL for parsing, and provide some information about yourself.")
 
+            st.header('Credits', divider='red')
+            st.markdown('''Crafted by **Vadim Platon**  
+                        Mentor: **Denis Smocvin**''')
+            st.markdown("**Special thanks goes to Sigmoid.**")
+            st.image(sigmoid_logo)
+
     def _custom_widget(self):
+        """
+        This function renders the UI elements for the custom job description section.
+        """
         st.header('Custom', divider='red')
         job_desc = st.text_area("Paste job description:",)
         if job_desc:
@@ -65,8 +87,13 @@ class WebApp:
                 st.write_stream(WebApp._stream_data(suitability_response))
 
     def _rabota_widget(self):
+        """
+        This function renders the UI elements for the Rabota.md scraper section.
+        """
         st.header('rabota.md', divider='red')
-        job_url = st.text_input("Paste url to job description page:", placeholder="https://www.rabota.md/ro/locuri-de-munca/senior-front-end-razrabotchik-ot-2500/74679")
+        job_url = st.text_input("Paste url to job description page:",
+                                placeholder="https://www.rabota.md/ro/locuri-de-munca/"
+                                            "senior-front-end-razrabotchik-ot-2500/74679")
         if job_url:
             parser = ParseRabota()
             job_data = parser.get_job_by_url(job_url=job_url)
@@ -110,12 +137,16 @@ class WebApp:
                     cover_letter = self.AI.generate_cover_letter(personal_data, job_data)
                     st.header('Your Cover Letter', divider='gray')
                     st.write_stream(WebApp._stream_data(cover_letter))
+
                 if suitability_btn:
-                    suitability_response = self.AI.calculate_suitability(personal_data, job_data)
+                    suitability_response = self.AI.calculate_suitability(personal_data, job_data, by_desc=False)
                     st.header('Your Suitability for this job', divider='gray')
                     st.write_stream(WebApp._stream_data(suitability_response))
 
     def _delucru_widget(self):
+        """
+        This function renders the UI elements for the Delucru.md scraper section.
+        """
         st.header('Delucru.md', divider='red')
         job_url = st.text_input("Paste url to job description page:", placeholder="https://www.delucru.md/job/{id}")
         if job_url:
@@ -164,13 +195,21 @@ class WebApp:
                     st.header('Your Cover Letter', divider='gray')
                     st.write_stream(WebApp._stream_data(cover_letter))
                 if suitability_btn:
-                    suitability_response = self.AI.calculate_suitability(personal_data, job_data)
+                    suitability_response = self.AI.calculate_suitability(personal_data, job_data, by_desc=False)
                     st.header('Your Suitability for this job', divider='gray')
                     st.write_stream(WebApp._stream_data(suitability_response))
 
-
     @staticmethod
     def _stream_data(data):
+        """
+        This function generates a stream of words from the provided data with a delay.
+
+        Args:
+            data (str): The data to be streamed as individual words.
+
+        Yields:
+            str: Each word from the data string with a delay.
+        """
         for word in data.split(" "):
             yield word + " "
             time.sleep(0.02)

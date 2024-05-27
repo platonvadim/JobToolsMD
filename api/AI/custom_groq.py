@@ -2,12 +2,37 @@ from groq import Groq
 
 
 class GroqClient:
+    """
+    A class for interacting with the Groq API to generate cover letters and calculate suitability.
+
+    Attributes:
+        client (Groq): An instance of the Groq API client.
+    """
     def __init__(self, api):
+        """
+        Initializes the GroqClient class.
+
+        Args:
+            api (str): The API key for accessing the Groq API.
+        """
+
         self.client = Groq(
                 api_key=api,
             )
 
     def generate_cover_letter(self, personal_data, job_data, by_desc=False):
+        """
+        Generates a cover letter based on personal and job-related information.
+
+        Args:
+            personal_data (dict): Personal information including name, surname, skills, and experience.
+            job_data (dict): Job-related information including title, salary, schedule, education, experience,
+                             city, and job description.
+            by_desc (bool, optional): If True, use job description directly. Defaults to False.
+
+        Returns:
+            str: The generated cover letter.
+        """
         if by_desc:
             details = job_data
         else:
@@ -48,6 +73,18 @@ class GroqClient:
         return chat_completion.choices[0].message.content
 
     def calculate_suitability(self, personal_data, job_data, by_desc):
+        """
+        Calculates the suitability of the job for the user based on personal and job-related information.
+
+        Args:
+            personal_data (dict): Personal information including name, surname, skills, and experience.
+            job_data (dict): Job-related information including title, salary, schedule, education, experience, city,
+                             and job description.
+            by_desc (bool): If True, use job description directly.
+
+        Returns:
+            str: A percentage indicating suitability.
+        """
         if by_desc:
             details = job_data
         else:

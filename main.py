@@ -3,7 +3,7 @@ import os
 
 
 def main():
-    app = WebApp(os.environ.get("GROQ_API_KEY"))
+    WebApp(os.environ.get("GROQ_API_KEY"))
 
 
 if __name__ == '__main__':
